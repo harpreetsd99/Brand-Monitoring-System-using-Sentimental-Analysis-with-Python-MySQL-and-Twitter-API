@@ -1,3 +1,9 @@
-credentials.py
+*~
+*.pyc
+*.swp
+*#
 __pycache__
-.ipynb_checkpoints
+.metadata
+.DS_Store
+*.log
+venv
