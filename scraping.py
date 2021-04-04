@@ -57,14 +57,14 @@ class MyStreamListener(tweepy.StreamListener):
         cur.execute(sql, val)
         conn.commit()
         
-#         delete_query = '''
-#         DELETE FROM {0}
-#         WHERE id_str IN (
-#             SELECT id_str 
-#             FROM {0}
-#             ORDER BY created_at asc
-#             LIMIT 200) AND (SELECT COUNT(*) FROM Facebook) > 9600;
-#         '''.format(settings.TABLE_NAME)
+        delete_query = '''
+        DELETE FROM {0}
+        WHERE id_str IN (
+            SELECT id_str 
+            FROM {0}
+            ORDER BY created_at asc
+            LIMIT 200) AND (SELECT COUNT(*) FROM Facebook) > 9600;
+        '''.format(settings.TABLE_NAME)
         
         cur.execute(delete_query)
         conn.commit()
