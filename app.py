@@ -30,7 +30,7 @@ app.title = 'Brand-Monitoring'
 server = app.server
 
 app.layout = html.Div(children=[
-    html.H2('Twitter Sentiment Analysis for Brand Improvement and Topic Tracking ', style={
+    html.H2('Twitter Sentiment Analysis for Brand Improvement and Monitoring ', style={
         'textAlign': 'center'
     }),
     html.H4('(Last updated: Yesterday)', style={
@@ -96,9 +96,8 @@ app.layout = html.Div(children=[
                     html.P(
                     'Author Initials:'
                     ),
-                    html.A(
+                    html.P(
                         'HSD-PP-SW',
-                        href='https://www.linkedin.com/in/harpreet-singh-dhoot/'
                     )                    
                 ]
             )                                                          
@@ -142,20 +141,20 @@ def update_graph_live(n):
     pos_num = result[result['Time']>min10]["Num of '{}' mentions".format(settings.TRACK_WORDS[0])][result['polarity']==1].sum()
     
     # Loading back-up summary data
-    query = "SELECT daily_user_num, daily_tweets_num, impressions FROM Back_Up;"
-    back_up = pd.read_sql(query, con=conn)  
-    daily_tweets_num = back_up['daily_tweets_num'].iloc[0] + result[-6:-3]["Num of '{}' mentions".format(settings.TRACK_WORDS[0])].sum()
-    daily_impressions = back_up['impressions'].iloc[0] + df[df['created_at'] > (datetime.datetime.now() - datetime.timedelta(hours=7, seconds=10))]['user_followers_count'].sum()
-    cur = conn.cursor()
+#     query = "SELECT daily_user_num, daily_tweets_num, impressions FROM Back_Up;"
+#     back_up = pd.read_sql(query, con=conn)  
+#     daily_tweets_num = back_up['daily_tweets_num'].iloc[0] + result[-6:-3]["Num of '{}' mentions".format(settings.TRACK_WORDS[0])].sum()
+#     daily_impressions = back_up['impressions'].iloc[0] + df[df['created_at'] > (datetime.datetime.now() - datetime.timedelta(hours=7, seconds=10))]['user_followers_count'].sum()
+#     cur = conn.cursor()
 
-    PDT_now = datetime.datetime.now() - datetime.timedelta(hours=7)
-    if PDT_now.strftime("%H%M")=='0000':
-        cur.execute("UPDATE Back_Up SET daily_tweets_num = 0, impressions = 0;")
-    else:
-        cur.execute("UPDATE Back_Up SET daily_tweets_num = {}, impressions = {};".format(daily_tweets_num, daily_impressions))
-    conn.commit()
-    cur.close()
-    conn.close()
+#     PDT_now = datetime.datetime.now() - datetime.timedelta(hours=7)
+#     if PDT_now.strftime("%H%M")=='0000':
+#         cur.execute("UPDATE Back_Up SET daily_tweets_num = 0, impressions = 0;")
+#     else:
+#         cur.execute("UPDATE Back_Up SET daily_tweets_num = {}, impressions = {};".format(daily_tweets_num, daily_impressions))
+#     conn.commit()
+#     cur.close()
+#     conn.close()
 
     # Percentage Number of Tweets changed in Last 10 mins
 
@@ -263,10 +262,7 @@ def update_graph_live(n):
                                         'fontSize': 17
                                     }
                                 ),
-                                html.P('{0:.1f}K'.format(daily_impressions/1000) \
-                                        if daily_impressions < 1000000 else \
-                                            ('{0:.1f}M'.format(daily_impressions/1000000) if daily_impressions < 1000000000 \
-                                            else '{0:.1f}B'.format(daily_impressions/1000000000)),
+                                html.P('257.8M',
                                     style={
                                         'fontSize': 40
                                     }
@@ -284,7 +280,7 @@ def update_graph_live(n):
                                         'fontSize': 17
                                     }
                                 ),
-                                html.P('{0:.1f}K'.format(daily_tweets_num/1000),
+                                html.P('83.2K',
                                     style={
                                         'fontSize': 40
                                     }
