@@ -133,8 +133,8 @@ def update_graph_live(n):
     result = result.rename(columns={"id_str": "Num of '{}' mentions".format(settings.TRACK_WORDS[0]), "created_at":"Time"})  
     time_series = result["Time"][result['polarity']==0].reset_index(drop=True)
 
-    min10 = datetime.datetime.now() - datetime.timedelta(hours=7, minutes=10)
-    min20 = datetime.datetime.now() - datetime.timedelta(hours=7, minutes=20)
+    min10 = datetime.datetime.now() - datetime.timedelta(hours=24, minutes=10)
+    min20 = datetime.datetime.now() - datetime.timedelta(hours=24, minutes=20)
 
     neu_num = result[result['Time']>min10]["Num of '{}' mentions".format(settings.TRACK_WORDS[0])][result['polarity']==0].sum()
     neg_num = result[result['Time']>min10]["Num of '{}' mentions".format(settings.TRACK_WORDS[0])][result['polarity']==-1].sum()
@@ -216,7 +216,7 @@ def update_graph_live(n):
                                 ],
                                 'layout':{
                                     'showlegend':False,
-                                    'title':'Tweets In Last 10 Mins',
+                                    'title':'Tweets Recently',
                                     'annotations':[
                                         dict(
                                             text='{0:.1f}K'.format((pos_num+neg_num+neu_num)/1000),
@@ -238,7 +238,7 @@ def update_graph_live(n):
                     children=[
                         html.Div(
                             children=[
-                                html.P('Tweets/10 Mins Changed By',
+                                html.P('Tweets/Day Changed By',
                                     style={
                                         'fontSize': 17
                                     }
