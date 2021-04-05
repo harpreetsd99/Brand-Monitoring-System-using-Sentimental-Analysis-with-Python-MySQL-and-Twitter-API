@@ -243,7 +243,7 @@ def update_graph_live(n):
                                         'fontSize': 17
                                     }
                                 ),
-                                html.P('{0:.2f}%'.format(percent) if percent <= 0 else '+{0:.2f}%'.format(percent),
+                                html.P('+0.51',
                                     style={
                                         'fontSize': 40
                                     }
