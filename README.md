@@ -2,7 +2,7 @@
 
 
 
-[![Web App GIF](Web_App_GIF_Aug23.gif)]
+![Web App GIF](Web_App_GIF_Aug23.gif)
 <br/>
 
 #### • Brand Monitoring System was an idea that revolved around the creation of Live Dashboard using data visuals from Social Media platforms like Twitter, where one can track a specific product name or any sort of keyword and get a live representation of data on a dashboard with information related to polarity, region, etc.
